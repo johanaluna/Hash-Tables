@@ -1,6 +1,11 @@
 # '''
 # Linked List hash table key/value pair
 # '''
+
+"""
+hash table is a data structure that implements an array of
+linked lists to store data
+"""
 class LinkedPair:
     def __init__(self, key, value):
         self.key = key
@@ -30,14 +35,32 @@ class HashTable:
         '''
         Hash an arbitrary key using DJB2 hash
         OPTIONAL STRETCH: Research and implement DJB2
-        Explination
+        Explination:
+
+        Scientist Dan Bernstein. It uses bit manipulation and
+        prime numbers to create a hash index from a string.
+
         http://www.cse.yorku.ca/~oz/hash.html
         https://www.youtube.com/watch?v=jtMwp0FqEcg
-        the magic of number 33 (why it works better than many other constants, prime or not) has never been adequately explained
+        the magic of number 33
+        (why it works better than many other constants, prime or not)
+        has never been adequately explained.
         '''
         hash = 5381
         for x in key:
+            # x<<y
+            # Returns x with the bits shifted to the left by y places
+            # (and new bits on the right-hand-side are zeros).
+            # This is the same as multiplying x by 2**y 
+
+            # djb2 function: hash * 33 + c
+
+            # ord(x):Given a string of length one,
+            # return an integer representing the Unicode
             hash = (( hash << 5) + hash) + ord(x)
+
+            # The next function uses Xor
+            # hash(i) = hash(i - 1) * 33 ^ str[i]
         return hash & 0xFFFFFFFF
 
 
